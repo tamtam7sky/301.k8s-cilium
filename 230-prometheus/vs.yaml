@@ -1,0 +1,55 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: gw
+  namespace: monitoring
+spec:
+  # The selector matches the ingress gateway pod labels.
+  # If you installed Istio using Helm following the standard documentation, this would be "istio=ingress"
+  selector:
+    istio: ingressgateway
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - prometheus.k8s
+    - grafana.k8s
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: vs-for-prometheus
+    # namespace: istio-system
+  namespace: monitoring
+spec:
+  hosts:
+  - prometheus.k8s
+  gateways:
+  - gw
+  http:
+  - route:
+    - destination:
+        port:
+          number: 9090
+        host: prometheus-stack-kube-prom-prometheus.monitoring.svc.cluster.local
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: vs-for-grafana
+  namespace: monitoring
+spec:
+  hosts:
+  - grafana.k8s
+  gateways:
+  - gw
+  http:
+  - route:
+    - destination:
+        port:
+          number: 80
+        host: prometheus-stack-grafana.monitoring.svc.cluster.local
+---
+

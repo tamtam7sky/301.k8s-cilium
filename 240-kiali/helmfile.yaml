@@ -1,0 +1,10 @@
+# helmfile.yaml
+repositories:
+  - name: kiali
+    url: https://kiali.org/helm-charts
+
+releases:
+  - name: kiali-operator
+    namespace: istio-system
+    chart: kiali/kiali-operator
+

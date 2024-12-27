@@ -1,0 +1,1 @@
+kubectl patch pvc pv0002 -p '{"metadata":{"finalizers": []}}' --type=merge

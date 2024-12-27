@@ -1,0 +1,82 @@
+apiVersion: networking.istio.io/v1
+kind: Gateway
+metadata:
+  name: harbor-gw
+  namespace: registry
+spec:
+  # The selector matches the ingress gateway pod labels.
+  # If you installed Istio using Helm following the standard documentation, this would be "istio=ingress"
+  selector:
+    istio: ingressgateway
+  servers:
+  - port:
+      number: 443 
+      name: https-harbor
+      protocol: HTTPS
+    hosts:
+    - core.harbor.domain
+    - notary.domain
+    tls:
+      mode: PASSTHROUGH
+---
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: harbor-http-vs
+  namespace: registry
+spec:
+  hosts:
+  - core.harbor.domain
+  gateways:
+  - harbor-gw
+  http:
+  - match:
+    - port: 80
+    route:
+    - destination:
+        host: harbor.registry.svc.cluster.local
+        port:
+          number: 80
+---
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: harbor-https-vs
+  namespace: registry
+spec:
+  hosts:
+  - core.harbor.domain
+  gateways:
+  - harbor-gw
+  tls:
+  - match:
+    - port: 443
+      sniHosts:
+      - core.harbor.domain
+    route:
+    - destination:
+        host: harbor.registry.svc.cluster.local
+        port:
+          number: 443
+---
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: harbor-notary-vs
+  namespace: registry
+spec:
+  hosts:
+  - notary.domain
+  gateways:
+  - harbor-gw
+  tls:
+  - match:
+    - port: 443
+      sniHosts:
+      - notary.domain
+    route:
+    - destination:
+        host: harbor.registry.svc.cluster.local
+        port:
+          number: 4443
+

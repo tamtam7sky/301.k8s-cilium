@@ -1,0 +1,11 @@
+# helmfile.yaml
+repositories:
+  - name: harbor
+    url: https://helm.goharbor.io
+
+releases:
+  - name: harbor
+    namespace: registry
+    chart: harbor/harbor
+    values:
+    - ./values.yaml
