@@ -5,5 +5,6 @@ kubectl apply -f kiali-cr.yaml -n istio-system
 
 
 #  kubectl -n istio-system create token kiali-service-account
-echo 'alias create-token-kiali="kubectl -n istio-system create token kiali-service-account"' | tee -a ~/.bashrc
+COMMAND="alias create-token-kiali=\"kubectl -n istio-system create token kiali-service-account\""
+! $(grep -q "$COMMAND" ~/.bashrc) && echo $COMMAND | tee -a ~/.bashrc
 

@@ -1,6 +1,5 @@
 #!/usr/bin/bash
-set -xeu
-set -o pipefail
+set -xeuo pipefail
 
 kubectl apply -f gw.yaml -n istio-system
 

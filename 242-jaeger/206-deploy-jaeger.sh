@@ -54,7 +54,7 @@ EOF
 
 echo ""
 echo "##############################################################################"
-echo "# NOTION: Don't forget to add \"192.168.100.2  tracing.k8s\" to /etc/hosts on client pc."
+echo "# NOTION: Don't forget to add \"192.168.11.128  tracing.k8s\" to /etc/hosts on client pc."
 echo "##############################################################################"
 echo ""
 

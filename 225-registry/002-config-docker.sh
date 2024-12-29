@@ -29,5 +29,7 @@ sudo systemctl restart docker
 # Harborの名前解決を設定
 echo "$LOADBALANCER  $SERVER" | sudo tee -a /etc/hosts
 
+# パスワードはHarbor12345
 docker login -u admin https://$SERVER/
+
 

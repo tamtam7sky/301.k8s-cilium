@@ -1,6 +1,5 @@
 #!/usr/bin/bash
-set -xeu
-set -o pipefail
+set -xeuo pipefail
 
 istioctl install --set profile=demo -y
 
