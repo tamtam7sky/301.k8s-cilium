@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 set -xueo pipefail
 
 cat <<EOF | sudo tee -a /etc/sysctl.d/20-k8s.conf

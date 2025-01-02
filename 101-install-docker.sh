@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 set -xauo pipefail
 
 sudo apt update
@@ -11,7 +11,7 @@ echo "deb [arch=$(dpkg --print-architecture)] https://download.docker.com/linux/
 
 sudo apt update
 sudo apt install -y docker-ce docker-compose-plugin
-sudo usermod -aG docker $USER
+sudo usermod -aG docker "$USER"
 docker --version
 newgrp docker
 

@@ -1,5 +1,5 @@
-#!/bin/sh
-set -x
+#!/usr/bin/env bash
+set -xeuo pipefail
 
 cat <<EOF | sudo tee -a /etc/modules-load.d/k8s.conf
 overlay

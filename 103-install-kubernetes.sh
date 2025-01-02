@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 set -xeuo pipefail
 
 KUBE_VERSION="v1.32"
@@ -22,14 +22,22 @@ sudo apt-mark hold kubelet kubeadm kubectl
 sudo apt install -y bash-completion
 
 COMMAND="source <(kubectl completion bash)"
-! $(grep -q "$COMMAND" ~/.bashrc) && echo $COMMAND | tee -a ~/.bashrc
+if ! grep -q "$COMMAND" ~/.bashrc
+then
+	echo "$COMMAND" | tee -a ~/.bashrc
+fi
 
 kubectl completion bash |
 	sudo tee /etc/bash_completion.d/kubectl
 
 COMMAND="alias k=kubectl"
-! $(grep -q "$COMMAND" ~/.bashrc) && echo $COMMAND | tee -a ~/.bashrc
+if ! grep -q "$COMMAND" ~/.bashrc
+then
+	echo "$COMMAND" | tee -a ~/.bashrc
+fi
 
 COMMAND="complete -F __start_kubectl k"
-! $(grep -q "$COMMAND" ~/.bashrc) && echo $COMMAND | tee -a ~/.bashrc
-
+if ! grep -q "$COMMAND" ~/.bashrc
+then
+	echo "$COMMAND" | tee -a ~/.bashrc
+fi

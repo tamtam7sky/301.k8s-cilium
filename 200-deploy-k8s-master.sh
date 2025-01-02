@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 set -xeuo pipefail
 
 [ -e init-config.yaml ] && mv init-config.yaml init-config.yaml.old
@@ -76,9 +76,9 @@ sudo kubeadm reset -f
 # sudo kubeadm init --config ./init-config.yaml --skip-phases=addon/kube-proxy
 sudo kubeadm init --config ./init-config.yaml
 
-mkdir -p $HOME/.kube
-cp -f /etc/kubernetes/admin.conf $HOME/.kube/config
-chown $(id -u):$(id -g) $HOME/.kube/config
+mkdir -p "$HOME"/.kube
+cp -f /etc/kubernetes/admin.conf "$HOME"/.kube/config
+chown "$(id -u):$(id -g)" "$HOME"/.kube/config
 # sudo cp -f /etc/kubernetes/admin.conf $HOME/.kube/config
 # sudo chown $(id -u):$(id -g) $HOME/.kube/config
 

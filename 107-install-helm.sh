@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 set -xeuo pipefail
 
 curl -s https://baltocdn.com/helm/signing.asc |
