@@ -23,7 +23,7 @@ spec:
   - command:
     - sleep
     - "3600"
-    image: core.harbor.domain/sandbox/busybox:1.36.1
+    image: core.harbor.domain/sandbox/busybox:1.37.0
     name: busybox
   imagePullSecrets:
   - name: harborcred
