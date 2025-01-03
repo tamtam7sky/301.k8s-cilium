@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 set -xeuo pipefail
 
-VERSION="1.36.1"
+VERSION="1.37.0"
 
 # busybox のコンテナイメージを pull
 docker pull busybox:${VERSION}

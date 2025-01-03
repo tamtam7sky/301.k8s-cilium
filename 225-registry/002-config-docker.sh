@@ -25,6 +25,7 @@ sudo update-ca-certificates
 
 # docker 再起動
 sudo systemctl restart docker
+sudo systemctl restart conainerd
 
 # Harborの名前解決を設定
 echo "$LOADBALANCER  $SERVER" | sudo tee -a /etc/hosts
